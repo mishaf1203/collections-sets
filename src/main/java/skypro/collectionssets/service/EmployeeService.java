@@ -10,12 +10,15 @@ import skypro.collectionssets.exception.EmployeeStorageIsFullException;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 public class EmployeeService {
 
     List<Employee> employees = new ArrayList<>();
+
     public Employee addEmployee(String name, String surName)throws EmployeeAlreadyAddedException {
         Employee emp = new Employee(name, surName);
         if (!employees.contains(emp)) {
@@ -44,10 +47,14 @@ public class EmployeeService {
         throw new EmployeeNotFoundException("Сотрудник не найден");
     }
 
-    public String printEmployees() {
-        for (int i = 0; i == employees.size(); i++) {
-            System.out.println(employees.toString());
-        }
-        return employees.toString();
+    public Collection<Employee> findAll() {
+        return Collections.unmodifiableList(employees);
     }
+
+//    public String printEmployees() {
+//        for (int i = 0; i == employees.size(); i++) {
+//            System.out.println(employees.toString());
+//        }
+//        return employees.toString();
+//    }
 }

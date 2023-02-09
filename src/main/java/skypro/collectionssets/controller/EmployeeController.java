@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import skypro.collectionssets.service.Employee;
 import skypro.collectionssets.service.EmployeeService;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -30,12 +32,18 @@ public class EmployeeController {
 //        return String.format("<h1>Сотрудник '%s' '%s' успешно добавлен</h1>", name, surName);
     }
 
+
     @GetMapping("/remove")
     public Employee remove(@RequestParam(name = "name") String name,
                         @RequestParam(name = "surName") String surName) {
 
         return employeeService.removeEmployee(name, surName);
 //        return String.format("Сотрудник '%s' '%s' успешно удален!", name, surName);
+    }
+
+    @GetMapping
+    public Collection<Employee> findAll() {
+        return employeeService.findAll();
     }
 
 
